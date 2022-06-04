@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const optionsContainer = document.getElementById("names");
     const approvedIcon = document.getElementById('approvedIcon');
     const rejectedIcon = document.getElementById('rejectedIcon');
-        
+
     let pokemonNames = [];
     let animation = new Animation;
     let pokemon = ""
@@ -23,16 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             const option = document.getElementById(`option${index}`);
             option.innerHTML = name;
         });
-        
-        const url = `https://getimgurl-pkmapi-v1.herokuapp.com/pkm/${selectedNamesWithNumber[0]}`;
 
-        let response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Something get wrong`);
-        }
-        let data = await response.json();
-        pokemonImage.src = `https://${data.pokemonUrl}`;
-        await pokemonImage.decode();
+        const pokemonNumber = parseInt(selectedNamesWithNumber[0].substring(0, 3));
+        const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`;
+
+        pokemonImage.src = imageUrl;
         stopLoader();
     }
 
